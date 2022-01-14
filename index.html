@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>サンプル</title>
+
+
+
+</head>
+<body>
+
+<p>サンプルページです。</p>
+
+<input type="button" value="open" id="openbtn">
+<input type="button" value="close" id="closebtn">
+
+<!-- START Button code -->
+
+    <img id="liveagent_button_online_5730p00000000VJ" style="display: none; border: 0px none; cursor: pointer" onclick="liveagent.startChat('5730p00000000VJ')"
+        src="https://validation-web-chat.cs74.force.com/liveAgentSetupFlow/resource/1637902984000/AgentAvatar" />
+    <img id="liveagent_button_offline_5730p00000000VJ" style="display: none; border: 0px none; " src="https://validation-web-chat.cs74.force.com/liveAgentSetupFlow/resource/1618910269000/CallcenterPhoto"
+    />
+    <script type="text/javascript">
+        if (!window._laq) { window._laq = []; }
+        window._laq.push(function () {
+            liveagent.showWhenOnline('5730p00000000VJ', document.getElementById('liveagent_button_online_5730p00000000VJ'));
+            liveagent.showWhenOffline('5730p00000000VJ', document.getElementById('liveagent_button_offline_5730p00000000VJ'));
+        });
+    </script>
+
+    <!-- END Button code -->
+
+    <!-- Deployment code -->
+    <script type='text/javascript' src='https://c.la1-c1cs-ukb.salesforceliveagent.com/content/g/js/54.0/deployment.js'></script>
+
+    <script type='text/javascript'>
+        // An auto query that searches contacts whose email field matches "john@acme.com"
+        liveagent.addCustomDetail('Contact E-mail', 'john@acme.com');
+        liveagent.findOrCreate('Contact').map('Email', 'Contact E-mail', true, false, false);
+        // Conducts a Knowledge One search on the provided value; in this case,
+        // searches Knowledge One articles for the term "Problems with my iPhone"
+        liveagent.addCustomDetail('Case Subject', 'Problem with my iPhone').doKnowledgeSearch();
+        // A fast-fill to populate a contact’s name with "John Doe"
+        liveagent.addCustomDetail('Contact Name', 'John Doe');
+        liveagent.findOrCreate('Contact').map('FirstName', 'Contact Name', false, false, false);
+        // Saves the custom detail to a custom field on LiveChatTranscript at the end of a chat
+        liveagent.addCustomDetail('Company', 'Acme').saveToTranscript('Company__c');
+        // Overrides the display name of the visitor in the agent console when engaged in a chat
+        liveagent.setName('John Doe');
+        // Sets the width of the chat window to 500px
+        liveagent.setChatWindowWidth(500);
+        // Sets the height of the chat window to 500px
+        liveagent.setChatWindowHeight(500);
+
+        liveagent.init('https://d.la1-c1cs-ukb.salesforceliveagent.com/chat', '5720p00000000IF', '00D0p00000017fd');
+    </script>
+
+
+<script>
+let newwin;
+
+let openbutton = document.getElementById('openbtn');
+openbutton.addEventListener('click', () => {
+    newwin = open('test.html');
+});
+
+let closebutton = document.getElementById('closebtn');
+closebutton.addEventListener('click', () => {
+});
+</script>
+<style type='text/css'>
+	.embeddedServiceHelpButton .helpButton .uiButton {
+		background-color: #005290;
+		font-family: "Arial", sans-serif;
+	}
+	.embeddedServiceHelpButton .helpButton .uiButton:focus {
+		outline: 1px solid #005290;
+	}
+</style>
+
+<script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
+<script type='text/javascript'>
+	var initESW = function(gslbBaseURL) {
+		embedded_svc.settings.displayHelpButton = true; //または false
+		embedded_svc.settings.language = ''; //たとえば、「en」または「en-US」を入力します
+
+		//embedded_svc.settings.defaultMinimizedText = '...'; //(エキスパートとチャットにデフォルト設定)
+		//embedded_svc.settings.disabledMinimizedText = '...'; //(エージェントがオフラインにデフォルト設定)
+
+		//embedded_svc.settings.loadingText = ''; //(読み込み中にデフォルト設定)
+		//embedded_svc.settings.storageDomain = 'yourdomain.com'; //(リリースのドメインを設定して、訪問者がチャットセッション中にサブドメインを移動できるようにします)
+
+		// チャット の設定
+		//embedded_svc.settings.directToButtonRouting = function(prechatFormData) {
+			// Dynamically changes the button ID based on what the visitor enters in the pre-chat form.
+			// Returns a valid button ID.
+		//};
+		//embedded_svc.settings.prepopulatedPrechatFields = {}; //事前チャットフォームの項目の自動入力を設定
+		//embedded_svc.settings.fallbackRouting = []; //ボタン ID、ユーザ ID、または userId_buttonId の配列
+		//embedded_svc.settings.offlineSupportMinimizedText = '...'; //(デフォルトは [お問い合わせ])
+
+		embedded_svc.settings.enabledFeatures = ['LiveAgent'];
+		embedded_svc.settings.entryFeature = 'LiveAgent';
+
+		embedded_svc.init(
+			'https://mypage360--validation.my.salesforce.com',
+			'https://validation-web-chat.cs74.force.com/liveAgentSetupFlow',
+			gslbBaseURL,
+			'00D0p00000017fd',
+			'Localhost_Chat_Agents',
+			{
+				baseLiveAgentContentURL: 'https://c.la1-c1cs-ukb.salesforceliveagent.com/content',
+				deploymentId: '5720p00000000I5',
+				buttonId: '5730p00000000VJ',
+				baseLiveAgentURL: 'https://d.la1-c1cs-ukb.salesforceliveagent.com/chat',
+				eswLiveAgentDevName: 'Localhost_Chat_Agents',
+				isOfflineSupportEnabled: false
+			}
+		);
+	};
+
+	if (!window.embedded_svc) {
+		var s = document.createElement('script');
+		s.setAttribute('src', 'https://mypage360--validation.my.salesforce.com/embeddedservice/5.0/esw.min.js');
+		s.onload = function() {
+			initESW(null);
+		};
+		document.body.appendChild(s);
+	} else {
+		initESW('https://service.force.com');
+	}
+</script>
+
+
+</body>
+</html>
